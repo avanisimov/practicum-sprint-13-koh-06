@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/cart_empty"/>
+                android:text="@string/cart_empty" />
         </FrameLayout>
 
     </FrameLayout>
