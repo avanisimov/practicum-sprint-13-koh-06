@@ -4,4 +4,6 @@
     <string name="cart_title">Корзина</string>
     <string name="cart_empty">Корзина пуста</string>
     <string name="catalog_item_add">в корзину</string>
+
+    <string name="currency">Р</string>
 </resources>
