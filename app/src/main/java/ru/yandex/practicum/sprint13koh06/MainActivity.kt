@@ -100,6 +100,9 @@ class MainActivity : AppCompatActivity() {
                                 )
                             )
                         }
+                        if (cartItems.isNotEmpty()) {
+                            binding.cartEmptyTitle.visibility = View.GONE
+                        }
                         cartItemsAdapter.setItems(cartItems)
                         it.copy(count = 1)
                     } else {
@@ -169,10 +172,12 @@ class MainActivity : AppCompatActivity() {
                 changeCurrentScreenMode(ScreenMode.CATALOG)
                 true
             }
+
             R.id.cart -> {
                 changeCurrentScreenMode(ScreenMode.CART)
                 true
             }
+
             else -> false
         }
     }
@@ -185,6 +190,7 @@ class MainActivity : AppCompatActivity() {
                     binding.catalogContainer.visibility = View.VISIBLE
                     binding.cartContainer.visibility = View.GONE
                 }
+
                 ScreenMode.CART -> {
                     binding.toolbar.setTitle(R.string.cart_title)
                     binding.catalogContainer.visibility = View.GONE
