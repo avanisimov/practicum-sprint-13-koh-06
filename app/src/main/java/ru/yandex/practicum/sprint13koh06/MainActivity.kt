@@ -129,7 +129,17 @@ class MainActivity : AppCompatActivity() {
                         it
                     }
                 }
+                catalogItems.forEach { catalogItem ->
+                    if (catalogItem.count == 0) {
+                        cartItems.forEach {
+                            if (it.catalogItem.id == catalogItem.id) {
+                                cartItems = cartItems.toMutableList().apply { remove(it) }
+                            }
+                        }
+                    }
+                }
                 catalogItemsAdapter.setItems(catalogItems)
+                cartItemsAdapter.setItems(cartItems)
             }
         }
     }
