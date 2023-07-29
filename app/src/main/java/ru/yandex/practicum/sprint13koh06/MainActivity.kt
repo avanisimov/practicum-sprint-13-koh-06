@@ -101,6 +101,9 @@ class MainActivity : AppCompatActivity() {
                             )
                         }
                         if (cartItems.isNotEmpty()) {
+                            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.cart)
+                            badge.isVisible = true
+                            badge.number = cartItems.size
                             binding.cartEmptyTitle.visibility = View.GONE
                         }
                         cartItemsAdapter.setItems(cartItems)
