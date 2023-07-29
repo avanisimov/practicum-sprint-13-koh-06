@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 catalogItems = catalogItems.map {
                     cartItems = cartItems.map { cartItem ->
                         if (cartItem.catalogItem.id == it.id) {
-                            cartItem.copy(count = (cartItem.count) + 1)
+                            cartItem.copy(count = cartItem.count + 1)
                         } else {
                             cartItem
                         }
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 catalogItems = catalogItems.map {
                     cartItems = cartItems.map { cartItem ->
                         if (cartItem.catalogItem.id == it.id) {
-                            cartItem.copy(count = (cartItem.count) - 1)
+                            cartItem.copy(count = cartItem.count - 1)
                         } else {
                             cartItem
                         }
@@ -161,22 +161,38 @@ class MainActivity : AppCompatActivity() {
         with(cartItemsAdapter) {
             onAddCountClickListener = OnCartAddCountClickListener { item ->
                 cartItems = cartItems.map {
+                    catalogItems = catalogItems.map { catalogItem ->
+                        if (catalogItem.id == it.catalogItem.id) {
+                            catalogItem.copy(count = it.count + 1)
+                        } else {
+                            catalogItem
+                        }
+                    }
                     if (it.id == item.id) {
                         it.copy(count = it.count + 1)
                     } else {
                         it
                     }
                 }
+                catalogItemsAdapter.setItems(catalogItems)
                 cartItemsAdapter.setItems(cartItems)
             }
             onRemoveCountClickListener = OnCartRemoveCountClickListener { item ->
                 cartItems = cartItems.map {
+                    catalogItems = catalogItems.map { catalogItem ->
+                        if (catalogItem.id == it.catalogItem.id) {
+                            catalogItem.copy(count = it.count - 1)
+                        } else {
+                            catalogItem
+                        }
+                    }
                     if (it.id == item.id) {
                         it.copy(count = it.count - 1)
                     } else {
                         it
                     }
                 }
+                catalogItemsAdapter.setItems(catalogItems)
                 cartItemsAdapter.setItems(cartItems)
             }
         }
