@@ -113,22 +113,38 @@ class MainActivity : AppCompatActivity() {
             }
             onAddCountClickListener = OnAddCountClickListener { item ->
                 catalogItems = catalogItems.map {
+                    cartItems = cartItems.map { cartItem ->
+                        if (cartItem.catalogItem.id == it.id) {
+                            cartItem.copy(count = (cartItem.count) + 1)
+                        } else {
+                            cartItem
+                        }
+                    }
                     if (it.id == item.id) {
                         it.copy(count = (it.count ?: 0) + 1)
                     } else {
                         it
                     }
                 }
+                cartItemsAdapter.setItems(cartItems)
                 catalogItemsAdapter.setItems(catalogItems)
             }
             onRemoveCountClickListener = OnRemoveCountClickListener { item ->
                 catalogItems = catalogItems.map {
+                    cartItems = cartItems.map { cartItem ->
+                        if (cartItem.catalogItem.id == it.id) {
+                            cartItem.copy(count = (cartItem.count) - 1)
+                        } else {
+                            cartItem
+                        }
+                    }
                     if (it.id == item.id) {
                         it.copy(count = (it.count ?: 0) - 1)
                     } else {
                         it
                     }
                 }
+                cartItemsAdapter.setItems(cartItems)
                 catalogItemsAdapter.setItems(catalogItems)
             }
         }
