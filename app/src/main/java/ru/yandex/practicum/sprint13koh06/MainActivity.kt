@@ -100,12 +100,7 @@ class MainActivity : AppCompatActivity() {
                                 )
                             )
                         }
-                        if (cartItems.isNotEmpty()) {
-                            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.cart)
-                            badge.isVisible = true
-                            badge.number = cartItems.size
-                            binding.cartEmptyTitle.visibility = View.GONE
-                        }
+                        binding.cartEmptyTitle.visibility = View.GONE
                         cartItemsAdapter.setItems(cartItems)
                         it.copy(count = 1)
                     } else {
@@ -113,6 +108,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 catalogItemsAdapter.setItems(catalogItems)
+                setUpBadgeState()
             }
             onAddCountClickListener = OnAddCountClickListener { item ->
                 catalogItems = catalogItems.map {
@@ -133,6 +129,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 catalogItemsAdapter.setItems(catalogItems)
+                setUpBadgeState()
             }
         }
     }
@@ -165,7 +162,15 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 cartItemsAdapter.setItems(cartItems)
+                setUpBadgeState()
             }
+        }
+    }
+
+    private fun setUpBadgeState() {
+        binding.bottomNavigation.getOrCreateBadge(R.id.cart).apply {
+            number = cartItems.size
+            isVisible = cartItems.isNotEmpty()
         }
     }
 
