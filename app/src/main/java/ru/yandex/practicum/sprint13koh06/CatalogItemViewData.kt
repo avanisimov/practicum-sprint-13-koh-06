@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.yandex.practicum.sprint13koh06.databinding.VCatalogItemBinding
+import java.text.NumberFormat
+import java.util.*
 
 data class CatalogItemViewData(
     val item: CatalogItem,
@@ -33,9 +35,11 @@ class CatalogItemViewHolder(
             .centerCrop()
             .into(binding.image)
         binding.title.text = viewData.item.name
-
+        val format = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("RU"))
+        val priceF = format.format(viewData.item.price.toDouble()/100)
+        val priceS = priceF.substring(0, priceF.length-2)
         val currencyChar = binding.root.context.getString(R.string.currency)
-        binding.price.text = "${viewData.item.price / 100} ${currencyChar}/${viewData.item.unit}"
+        binding.price.text = "$priceS $currencyChar/${viewData.item.unit}"
 
         if (viewData.count != null) {
             binding.addToCart.visibility = View.GONE
