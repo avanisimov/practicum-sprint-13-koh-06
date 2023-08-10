@@ -112,6 +112,13 @@ class MainActivity : AppCompatActivity() {
                 catalogItemsAdapter.setItems(catalogItems)
             }
             onAddCountClickListener = OnAddCountClickListener { item ->
+                cartItems = cartItems.map {
+                    if (it.catalogItem.id == item.id) {
+                        it.copy(count = it.count + 1)
+                    } else {
+                        it
+                    }
+                }
                 catalogItems = catalogItems.map {
                     if (it.id == item.id) {
                         it.copy(count = (it.count ?: 0) + 1)
@@ -119,9 +126,17 @@ class MainActivity : AppCompatActivity() {
                         it
                     }
                 }
+                cartItemsAdapter.setItems(cartItems)
                 catalogItemsAdapter.setItems(catalogItems)
             }
             onRemoveCountClickListener = OnRemoveCountClickListener { item ->
+                cartItems = cartItems.map {
+                    if (it.catalogItem.id == item.id) {
+                        it.copy(count = it.count - 1)
+                    } else {
+                        it
+                    }
+                }
                 catalogItems = catalogItems.map {
                     if (it.id == item.id) {
                         it.copy(count = (it.count ?: 0) - 1)
@@ -129,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                         it
                     }
                 }
+                cartItemsAdapter.setItems(cartItems)
                 catalogItemsAdapter.setItems(catalogItems)
             }
         }
@@ -151,6 +167,14 @@ class MainActivity : AppCompatActivity() {
                         it
                     }
                 }
+                catalogItems = catalogItems.map {
+                    if (it.id == item.catalogItem.id) {
+                        it.copy(count = item.count + 1)
+                    } else {
+                        it
+                    }
+                }
+                catalogItemsAdapter.setItems(catalogItems)
                 cartItemsAdapter.setItems(cartItems)
             }
             onRemoveCountClickListener = OnCartRemoveCountClickListener { item ->
@@ -161,6 +185,14 @@ class MainActivity : AppCompatActivity() {
                         it
                     }
                 }
+                catalogItems = catalogItems.map {
+                    if (it.id == item.catalogItem.id) {
+                        it.copy(count = item.count - 1)
+                    } else {
+                        it
+                    }
+                }
+                catalogItemsAdapter.setItems(catalogItems)
                 cartItemsAdapter.setItems(cartItems)
             }
         }

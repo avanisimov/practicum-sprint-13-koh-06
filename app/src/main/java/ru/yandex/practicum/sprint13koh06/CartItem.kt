@@ -30,8 +30,6 @@ class CartItemViewHolder(
 ) {
 
     fun bind(item: CartItem) {
-        binding.root
-
         Glide
             .with(binding.root.context)
             .load(item.catalogItem.imageUrl)
