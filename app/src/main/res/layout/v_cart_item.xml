@@ -42,8 +42,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center"
                     android:text="-" />
 
@@ -60,8 +58,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center"
                     android:text="+" />
 
