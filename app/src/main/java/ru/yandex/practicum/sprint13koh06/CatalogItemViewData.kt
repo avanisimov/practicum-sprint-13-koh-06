@@ -10,7 +10,7 @@ import ru.yandex.practicum.sprint13koh06.databinding.VCatalogItemBinding
 data class CatalogItemViewData(
     val item: CatalogItem,
     val count: Int?,
-){
+) {
     val id = item.id
 }
 
@@ -37,15 +37,17 @@ class CatalogItemViewHolder(
         val currencyChar = binding.root.context.getString(R.string.currency)
         binding.price.text = "${viewData.item.price / 100} ${currencyChar}/${viewData.item.unit}"
 
-        if (viewData.count != null) {
-            binding.addToCart.visibility = View.GONE
-            binding.countContainer.visibility = View.VISIBLE
-            binding.count.text = viewData.count.toString()
-        }
-
-        if (viewData.count == 0) {
-            binding.addToCart.visibility = View.VISIBLE
-            binding.countContainer.visibility = View.GONE
+        if (viewData.count != null && viewData.count != 0) {
+            binding.apply {
+                addToCart.visibility = View.GONE
+                countContainer.visibility = View.VISIBLE
+                count.text = viewData.count.toString()
+            }
+        } else {
+            binding.apply {
+                addToCart.visibility = View.VISIBLE
+                countContainer.visibility = View.GONE
+            }
         }
     }
 
